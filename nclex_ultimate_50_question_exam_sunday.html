@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunday Ultimate NCLEX Practice - 50 Questions</title>
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --panel: #ffffff;
+      --text: #1f1f1f;
+      --muted: #666666;
+      --border: #d8d8d8;
+      --accent: #3d3d3d;
+      --button: #ececec;
+      --button-text: #111111;
+    }
+    body.dark {
+      --bg: #121212;
+      --panel: #1d1d1d;
+      --text: #f1f1f1;
+      --muted: #b8b8b8;
+      --border: #3a3a3a;
+      --accent: #d8d8d8;
+      --button: #2d2d2d;
+      --button-text: #f1f1f1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .header {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    h1, h2, h3 { margin-top: 0; }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    button {
+      background: var(--button);
+      color: var(--button-text);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover { opacity: 0.95; }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .question {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .qnum {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .type {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    .stem {
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .options {
+      margin: 0 0 14px 0;
+      padding-left: 22px;
+    }
+    .options li { margin-bottom: 8px; }
+    .answer {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .answer strong {
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .footer-note {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <h1>Sunday Ultimate NCLEX Practice</h1>
+      <p class="meta">50 advanced application questions • All test content • Built for entry-level nursing priorities, perfusion, and first-best actions</p>
+      <p>This final set keeps the same plain quiz format and is weighted toward what your instructor emphasized across the transcript, concept guides, study tables, and remediation materials: keeping the patient alive, recognizing deterioration early, and choosing the safest first intervention.</p>
+      <div class="toolbar">
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <button onclick="toggleAllAnswers()">Show/Hide All Rationales</button>
+      </div>
+    </div>
+
+    <div id="questions"></div>
+
+    <div class="footer-note">Use the reveal button only after you commit to an answer so the set functions like a real test.</div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+            "type": "Priority recognition / Early shock",
+            "stem": "A postoperative client becomes restless and increasingly thirsty. The heart rate rises from 88/min to 118/min over 45 minutes, urine output falls, and the blood pressure is still 112/68 mm Hg. Which interpretation is most accurate?",
+            "options": [
+                  "The client is stable because hypotension is not present.",
+                  "The client may be entering compensatory shock and needs prompt reassessment and intervention.",
+                  "The findings are most consistent with simple postoperative pain only.",
+                  "The client is improving because the MAP is still within range."
+            ],
+            "answer": "B. The client may be entering compensatory shock and needs prompt reassessment and intervention.",
+            "rationale": "The lecture emphasizes that tachycardia is usually the earliest sign of shock and hypotension is late. Restlessness, thirst, and falling urine output are also early perfusion warnings, so the nurse should not wait for blood pressure to crash."
+      },
+      {
+            "type": "Who to see first / Hypovolemic shock",
+            "stem": "Which client should the nurse assess first?",
+            "options": [
+                  "A client with a closed tibia fracture and pain rated 8/10",
+                  "A client with a distended rigid abdomen, tachycardia, and cool clammy skin after trauma",
+                  "A client with a superficial forearm laceration that is slowly oozing blood",
+                  "A client with nausea after receiving IV opioids"
+            ],
+            "answer": "B. A client with a distended rigid abdomen, tachycardia, and cool clammy skin after trauma",
+            "rationale": "These findings suggest internal hemorrhage with hypovolemic shock. The course repeatedly frames shock questions around identifying what can kill the patient first, and suspected internal bleeding is the priority."
+      },
+      {
+            "type": "Priority recognition / Septic shock",
+            "stem": "A hospitalized client with pneumonia is warm, flushed, mildly confused, and tachycardic. Blood pressure is 102/60 mm Hg, down from 134/78 earlier, and urine output has decreased. Which action is most appropriate?",
+            "options": [
+                  "Reassure the client because warm dry skin rules out shock.",
+                  "Recognize possible early septic shock and escalate care promptly.",
+                  "Wait for the blood pressure to drop below 90 systolic before acting.",
+                  "Document the changes as expected with fever and continue routine care."
+            ],
+            "answer": "B. Recognize possible early septic shock and escalate care promptly.",
+            "rationale": "The transcript stresses that early septic shock can look deceptively warm and not dramatically hypotensive at first. Trend changes, confusion, tachycardia, and falling urine output matter."
+      },
+      {
+            "type": "Priority intervention / Anaphylactic shock",
+            "stem": "A client develops lip swelling, stridor, wheezing, and hypotension minutes after an IV antibiotic is started. Which action is the nurse's first priority?",
+            "options": [
+                  "Administer epinephrine promptly and treat the situation as an airway emergency.",
+                  "Give diphenhydramine and reassess in 15 minutes.",
+                  "Lower the head of the bed and encourage slow breathing.",
+                  "Obtain blood cultures before additional treatment."
+            ],
+            "answer": "A. Administer epinephrine promptly and treat the situation as an airway emergency.",
+            "rationale": "The lecture is explicit that anaphylactic shock is different from classic shock because airway compromise becomes an immediate threat, and epinephrine is the intervention that fixes the problem."
+      },
+      {
+            "type": "SATA / Sepsis bundle priorities",
+            "stem": "The nurse suspects septic shock in a client with worsening confusion, fever, tachycardia, and falling urine output. Which actions align with the lecture's priority approach? Select all that apply.",
+            "options": [
+                  "Draw blood cultures before antibiotics when possible.",
+                  "Start broad-spectrum antibiotics promptly.",
+                  "Check lactate and other signs of worsening perfusion.",
+                  "Delay fluids until all culture results return.",
+                  "Monitor closely for bleeding and DIC.",
+                  "Assume the client is stable if the skin is still warm."
+            ],
+            "answer": "A, B, C, E",
+            "rationale": "The lecture ties septic shock care to early recognition, cultures before antibiotics when possible, rapid broad-spectrum antibiotics, lactate monitoring, fluids/vasopressors as indicated, and watching for DIC. Warm skin early does not mean stable."
+      },
+      {
+            "type": "Priority intervention / Cardiogenic shock",
+            "stem": "A client with a large acute myocardial infarction develops cardiogenic shock. Which intervention should the nurse anticipate as more appropriate than a rapid large-volume fluid bolus?",
+            "options": [
+                  "Aggressive fluid loading until the lungs clear",
+                  "Inotropic support to improve contractility",
+                  "Trendelenburg positioning as definitive treatment",
+                  "Withholding oxygen to reduce myocardial demand"
+            ],
+            "answer": "B. Inotropic support to improve contractility",
+            "rationale": "The lecture repeatedly teaches that cardiogenic shock is a pump problem. It is not corrected by fluid loading alone and may worsen with large fluid boluses because the failing heart cannot handle the extra volume."
+      },
+      {
+            "type": "Priority intervention / Obstructive shock",
+            "stem": "A client has obstructive shock from a massive pulmonary embolism. Which treatment principle best matches the lecture?",
+            "options": [
+                  "Rapidly fix the low blood pressure by giving only large fluid boluses.",
+                  "Relieve or treat the obstruction while supporting perfusion.",
+                  "Treat it like cardiogenic shock because both involve low cardiac output.",
+                  "Delay treatment until classic cool clammy shock signs appear."
+            ],
+            "answer": "B. Relieve or treat the obstruction while supporting perfusion.",
+            "rationale": "For obstructive shock, the nurse must think beyond fluids. The lecture emphasized that PE, tamponade, and tension pneumothorax require correction of the obstruction itself."
+      },
+      {
+            "type": "Evaluation of response / Shock",
+            "stem": "Which finding best indicates that shock treatment is improving organ perfusion?",
+            "options": [
+                  "Blood pressure rises from 82/48 to 88/52 mm Hg with no other change",
+                  "Heart rate rises from 112/min to 130/min",
+                  "Urine output increases from 12 mL/hr to 36 mL/hr",
+                  "Lactate rises from 3.2 mmol/L to 5.8 mmol/L"
+            ],
+            "answer": "C. Urine output increases from 12 mL/hr to 36 mL/hr",
+            "rationale": "The lecture calls urine output the clearest bedside sign that treatment is working. Improving renal perfusion is more meaningful than a small blood pressure change alone."
+      },
+      {
+            "type": "Advanced application / Neurogenic shock",
+            "stem": "A client with a high spinal cord injury is hypotensive, bradycardic, and warm and dry. Which nursing interpretation is most accurate?",
+            "options": [
+                  "This is typical hypovolemic shock and requires large fluid replacement as the main treatment.",
+                  "This pattern is consistent with neurogenic shock from loss of sympathetic tone.",
+                  "This is septic warm shock until proven otherwise.",
+                  "The bradycardia means shock is unlikely."
+            ],
+            "answer": "B. This pattern is consistent with neurogenic shock from loss of sympathetic tone.",
+            "rationale": "The lecture distinguishes neurogenic shock by bradycardia, warm dry skin, and hypotension from loss of sympathetic tone. It specifically warns against thinking only in terms of fluid loss."
+      },
+      {
+            "type": "Priority recognition / Septic shock complication",
+            "stem": "Which finding in a client with septic shock should make the nurse most concerned about disseminated intravascular coagulation (DIC)?",
+            "options": [
+                  "Urine output of 34 mL/hr",
+                  "Oozing blood from the IV site and new bruising",
+                  "Warm dry skin early in the course",
+                  "Blood pressure of 108/64 mm Hg"
+            ],
+            "answer": "B. Oozing blood from the IV site and new bruising",
+            "rationale": "The transcript highlights DIC as a major difference in septic shock. Oozing from IV sites, easy bruising, and bleeding are classic warning signs."
+      },
+      {
+            "type": "Foundational concept / MAP and perfusion",
+            "stem": "The lecture repeatedly links tissue perfusion to mean arterial pressure (MAP). Which statement best matches that teaching?",
+            "options": [
+                  "MAP reflects perfusion adequacy more directly than looking at systolic pressure alone.",
+                  "MAP matters only in cardiogenic shock.",
+                  "MAP is not useful if the client has tachycardia.",
+                  "MAP can be ignored if oxygen saturation is normal."
+            ],
+            "answer": "A. MAP reflects perfusion adequacy more directly than looking at systolic pressure alone.",
+            "rationale": "The instructor repeatedly ties shock recognition to MAP, cardiac output, and vascular resistance, teaching that MAP is the practical indicator of whether tissues are being perfused adequately."
+      },
+      {
+            "type": "Who to see first / Shock prioritization",
+            "stem": "Which client should the nurse assess first?",
+            "options": [
+                  "A client with septic shock whose urine output has fallen to 8 mL/hr over the last hour",
+                  "A client with cardiogenic shock who says the room is noisy and wants the door shut",
+                  "A client with hypovolemic shock whose IV fluids are infusing and who asks for ice chips",
+                  "A client with anaphylaxis whose rash is improving after treatment"
+            ],
+            "answer": "A. A client with septic shock whose urine output has fallen to 8 mL/hr over the last hour",
+            "rationale": "Falling urine output is a major bedside marker of worsening perfusion. The client with severe oliguria is showing immediate organ-level deterioration and needs prompt reassessment."
+      },
+      {
+            "type": "Priority intervention / Rhythm change",
+            "stem": "The telemetry monitor alarms and displays a wide-complex rhythm. What is the nurse's first action?",
+            "options": [
+                  "Prepare the defibrillator immediately.",
+                  "Assess the client and check for a pulse.",
+                  "Call the provider after printing the strip.",
+                  "Administer amiodarone from the code box."
+            ],
+            "answer": "B. Assess the client and check for a pulse.",
+            "rationale": "Across the dysrhythmia content, the first rule is assess the patient first, not just the monitor. The next step depends on whether the client has a pulse and whether perfusion is present."
+      },
+      {
+            "type": "Priority intervention / Symptomatic bradycardia",
+            "stem": "A client has sinus bradycardia at 42/min with dizziness and hypotension. Which intervention should the nurse anticipate first?",
+            "options": [
+                  "Atropine",
+                  "Adenosine",
+                  "Defibrillation",
+                  "Valsalva maneuver"
+            ],
+            "answer": "A. Atropine",
+            "rationale": "The lecture teaches symptomatic bradycardia as an atropine-first problem, with pacing or infusions if needed afterward. Adenosine and vagal maneuvers are for tachyarrhythmias."
+      },
+      {
+            "type": "Clinical judgment / Sinus tachycardia",
+            "stem": "A client with a temperature of 102.6°F has sinus tachycardia at 124/min. Which nursing approach is best?",
+            "options": [
+                  "Treat the underlying cause of the tachycardia.",
+                  "Begin synchronized cardioversion.",
+                  "Give adenosine rapid IV push.",
+                  "Prepare for transcutaneous pacing."
+            ],
+            "answer": "A. Treat the underlying cause of the tachycardia.",
+            "rationale": "The lecture stresses that sinus tachycardia is often compensatory. Fever, hypovolemia, anemia, and pain are examples of causes that should be corrected rather than electrically shocking the rhythm."
+      },
+      {
+            "type": "Priority intervention / Stable SVT",
+            "stem": "A client is alert, has a regular narrow-complex tachycardia at 190/min, and reports palpitations and anxiety. Blood pressure is 118/74 mm Hg. Which action should the nurse anticipate first?",
+            "options": [
+                  "Unsynchronized defibrillation",
+                  "Vagal maneuvers",
+                  "Chest compressions",
+                  "Permanent pacemaker placement"
+            ],
+            "answer": "B. Vagal maneuvers",
+            "rationale": "For stable SVT, the least invasive first step is a vagal maneuver. The lecture mentions bearing down or blowing through a straw before moving to adenosine."
+      },
+      {
+            "type": "Medication safety / Adenosine",
+            "stem": "The nurse is preparing to administer adenosine for persistent SVT. Which action is most appropriate?",
+            "options": [
+                  "Infuse the medication slowly over 10 minutes.",
+                  "Give the medication by rapid IV push followed by an immediate flush.",
+                  "Mix the medication in a maintenance bag and let it run by gravity.",
+                  "Warn the client that no rhythm change will occur until the second dose."
+            ],
+            "answer": "B. Give the medication by rapid IV push followed by an immediate flush.",
+            "rationale": "The course materials emphasize that adenosine must be given rapidly with an immediate flush, and the nurse should be prepared for brief asystole or an alarming transient pause."
+      },
+      {
+            "type": "Priority goal / Atrial fibrillation",
+            "stem": "A client has chronic atrial fibrillation with a ventricular rate of 82/min. Which nursing focus is highest priority over the long term?",
+            "options": [
+                  "Preventing stroke from atrial clot formation",
+                  "Teaching the client that all irregular rhythms require defibrillation",
+                  "Encouraging daily vagal maneuvers",
+                  "Stopping all anticoagulation before discharge"
+            ],
+            "answer": "A. Preventing stroke from atrial clot formation",
+            "rationale": "The lecture's AFib framework begins with avoiding stroke. In atrial fibrillation, ineffective atrial emptying allows blood to pool and clot."
+      },
+      {
+            "type": "Priority intervention / Unstable AFib with RVR",
+            "stem": "A client with atrial fibrillation and a ventricular rate of 168/min becomes hypotensive, diaphoretic, and confused. Which collaborative intervention should the nurse prepare for?",
+            "options": [
+                  "Synchronized cardioversion",
+                  "Vagal maneuvers only",
+                  "Defibrillation without checking the pulse",
+                  "Atropine"
+            ],
+            "answer": "A. Synchronized cardioversion",
+            "rationale": "The client is unstable and has an organized tachyarrhythmia with a pulse. The lecture ties unstable AFib with RVR to synchronized cardioversion."
+      },
+      {
+            "type": "Advanced application / Cardioversion safety",
+            "stem": "A client has had atrial fibrillation for more than 48 hours and is scheduled for elective synchronized cardioversion. Which intervention is essential?",
+            "options": [
+                  "Ensure anticoagulation is addressed before elective cardioversion.",
+                  "Hold all anticoagulants because shock will dislodge fewer clots.",
+                  "Administer atropine just before the procedure.",
+                  "Prepare for unsynchronized defibrillation."
+            ],
+            "answer": "A. Ensure anticoagulation is addressed before elective cardioversion.",
+            "rationale": "The lecture emphasizes that if AFib has lasted more than 48 hours, anticoagulation is generally needed before elective cardioversion because restoring the rhythm may dislodge a clot."
+      },
+      {
+            "type": "Priority intervention / Ventricular tachycardia",
+            "stem": "The monitor shows ventricular tachycardia. What should the nurse determine immediately before choosing the next intervention?",
+            "options": [
+                  "Whether the client has a pulse",
+                  "Whether the PR interval is prolonged",
+                  "Whether the client ate recently",
+                  "Whether the client has had vagal maneuvers"
+            ],
+            "answer": "A. Whether the client has a pulse",
+            "rationale": "The lecture repeatedly frames VT questions around pulse check first. Stable VT with a pulse, unstable VT with a pulse, and pulseless VT are managed differently."
+      },
+      {
+            "type": "Priority intervention / Pulseless VT",
+            "stem": "A client becomes unresponsive and pulseless, and the monitor shows ventricular tachycardia. Which action is the priority?",
+            "options": [
+                  "Immediate defibrillation and CPR",
+                  "Synchronized cardioversion only",
+                  "Atropine IV push",
+                  "Vagal maneuvers"
+            ],
+            "answer": "A. Immediate defibrillation and CPR",
+            "rationale": "Pulseless VT is treated like ventricular fibrillation. The lecture clearly separates shockable pulseless rhythms from rhythms that require other approaches."
+      },
+      {
+            "type": "SATA / Nonshockable rhythms",
+            "stem": "Which actions are appropriate for asystole or pulseless electrical activity (PEA)? Select all that apply.",
+            "options": [
+                  "Begin high-quality CPR.",
+                  "Give epinephrine per protocol.",
+                  "Search for reversible causes.",
+                  "Defibrillate immediately.",
+                  "Treat the client as pulseless even if the monitor looks organized.",
+                  "Use synchronized cardioversion."
+            ],
+            "answer": "A, B, C, E",
+            "rationale": "Asystole and PEA are nonshockable rhythms. The lecture teaches CPR, epinephrine, and treatment of reversible causes, not defibrillation or synchronized cardioversion."
+      },
+      {
+            "type": "Medication recognition / Torsades",
+            "stem": "A client develops torsades de pointes. Which medication is most closely associated with the lecture's treatment focus?",
+            "options": [
+                  "Magnesium sulfate",
+                  "Digoxin",
+                  "Warfarin",
+                  "Furosemide"
+            ],
+            "answer": "A. Magnesium sulfate",
+            "rationale": "The transcript singles out magnesium sulfate as the key treatment for torsades de pointes, a specific type of polymorphic ventricular tachycardia."
+      },
+      {
+            "type": "Who to see first / Dysrhythmia prioritization",
+            "stem": "Which client should the nurse assess first?",
+            "options": [
+                  "A client with asymptomatic PVCs after drinking coffee",
+                  "A client with sinus tachycardia at 110/min and a temperature of 100.8°F",
+                  "A client with atrial fibrillation who now has sudden slurred speech",
+                  "A client with sinus bradycardia at 56/min who is resting quietly"
+            ],
+            "answer": "C. A client with atrial fibrillation who now has sudden slurred speech",
+            "rationale": "Atrial fibrillation carries stroke risk. Sudden neurologic change suggests an embolic event and is more urgent than stable or expected rhythm changes."
+      },
+      {
+            "type": "Priority intervention / Ventricular fibrillation",
+            "stem": "A client is found pulseless, apneic, and in ventricular fibrillation. Which statement best reflects the priority action?",
+            "options": [
+                  "Defibrillate as soon as possible while maintaining high-quality CPR.",
+                  "Give atropine first because the heart rate is absent.",
+                  "Do not shock until a 12-lead ECG confirms the rhythm.",
+                  "Treat only with oxygen because the rhythm may self-convert."
+            ],
+            "answer": "A. Defibrillate as soon as possible while maintaining high-quality CPR.",
+            "rationale": "VF is a shockable rhythm. The ACLS-based course materials emphasize defibrillation plus ongoing CPR as the key early intervention."
+      },
+      {
+            "type": "Priority intervention / Tet spell",
+            "stem": "An infant with tetralogy of Fallot becomes intensely cyanotic and irritable during an IV start. Which action should the nurse take first?",
+            "options": [
+                  "Place the infant in a knee-chest position and keep the infant calm.",
+                  "Offer a large feeding immediately.",
+                  "Lay the infant flat and observe.",
+                  "Hold a tight oxygen mask firmly over the face."
+            ],
+            "answer": "A. Place the infant in a knee-chest position and keep the infant calm.",
+            "rationale": "The first priority during a Tet spell is knee-chest positioning. The lecture also stresses keeping the infant calm, ideally with the parent helping, because agitation worsens the spell."
+      },
+      {
+            "type": "SATA / Tet spell prevention",
+            "stem": "Which nursing actions help reduce the risk of Tet spells? Select all that apply.",
+            "options": [
+                  "Feed at the first signs of hunger rather than after prolonged crying.",
+                  "Use small, frequent feedings.",
+                  "Provide a calm environment and avoid unnecessary stimulation.",
+                  "Interrupt naps often so the infant stays on schedule.",
+                  "Treat fever and dehydration promptly.",
+                  "Use comfort measures during stressful procedures."
+            ],
+            "answer": "A, B, C, E, F",
+            "rationale": "Crying, dehydration, fever, feeding stress, and stimulation can trigger Tet spells. The lecture recommends feeding before intense crying, small frequent feedings, calm handling, and comfort during procedures."
+      },
+      {
+            "type": "Nutritional management / Tetralogy of Fallot",
+            "stem": "Which feeding plan is most appropriate for an infant with tetralogy of Fallot who becomes tachypneic and fatigued during feeds?",
+            "options": [
+                  "Large feedings every 6 hours to let the infant rest longer",
+                  "Small frequent feedings, limiting feeding time and giving the remainder by NG tube if needed",
+                  "Continuous oral feeding until the full amount is taken",
+                  "Restricting all high-calorie formula because it increases workload"
+            ],
+            "answer": "B. Small frequent feedings, limiting feeding time and giving the remainder by NG tube if needed",
+            "rationale": "The lecture teaches small frequent feeds, limiting feed time to about 30 minutes, fortifying calories when needed, and finishing the remainder by NG tube if the infant tires out."
+      },
+      {
+            "type": "Medication safety / Pediatric digoxin",
+            "stem": "The nurse is preparing to give digoxin to an 11-month-old infant with congenital heart disease. The apical pulse is 88/min. What should the nurse do?",
+            "options": [
+                  "Give the medication because the pulse is above 80/min.",
+                  "Hold the medication and follow the hold parameters or notify the provider.",
+                  "Give half the dose.",
+                  "Mix the medication with formula and recheck later."
+            ],
+            "answer": "B. Hold the medication and follow the hold parameters or notify the provider.",
+            "rationale": "For testing, the lecture uses the general rule to hold digoxin if the pulse is below 90 in infants and young children. The medication should also not be mixed into feedings just to hide it."
+      },
+      {
+            "type": "SATA / Digoxin toxicity teaching",
+            "stem": "The nurse teaches parents of an infant taking digoxin which findings should be reported as possible digoxin toxicity? Select all that apply.",
+            "options": [
+                  "Vomiting",
+                  "Poor feeding or anorexia",
+                  "Bradycardia",
+                  "New dysrhythmias",
+                  "Improved urine output",
+                  "Visual halos in the infant as a likely normal effect"
+            ],
+            "answer": "A, B, C, D",
+            "rationale": "The transcript highlights nausea/vomiting, anorexia or poor feeding, bradycardia, and dysrhythmias as toxicity clues. Parents are taught to be overly cautious and report concerns."
+      },
+      {
+            "type": "Priority recognition / Polycythemia and hydration",
+            "stem": "Why does the lecture place strong emphasis on hydration in tetralogy of Fallot?",
+            "options": [
+                  "Hydration reverses the four structural defects.",
+                  "Hydration lowers stroke risk by reducing hyperviscosity related to polycythemia.",
+                  "Hydration prevents all murmurs.",
+                  "Hydration eliminates the need for surgery."
+            ],
+            "answer": "B. Hydration lowers stroke risk by reducing hyperviscosity related to polycythemia.",
+            "rationale": "Chronic hypoxemia can trigger polycythemia, making blood thicker and increasing clot and stroke risk. Hydration is a key nonpharmacologic protection."
+      },
+      {
+            "type": "Concept application / Squatting",
+            "stem": "An older child with tetralogy of Fallot squats after playing outside. How should the nurse interpret this behavior?",
+            "options": [
+                  "It is a sign of worsening neurologic injury.",
+                  "It is the child's way of increasing systemic vascular resistance to improve pulmonary blood flow.",
+                  "It indicates the child is trying to reduce preload and lower cardiac output.",
+                  "It shows the child is preparing for syncope and should be laid flat immediately."
+            ],
+            "answer": "B. It is the child's way of increasing systemic vascular resistance to improve pulmonary blood flow.",
+            "rationale": "The course repeatedly uses squatting as a classic clue. Squatting increases systemic vascular resistance and helps reduce right-to-left shunting."
+      },
+      {
+            "type": "Priority lab recognition / Tetralogy of Fallot",
+            "stem": "Which laboratory finding would the nurse expect to report in a child with chronic hypoxemia from tetralogy of Fallot?",
+            "options": [
+                  "Low hemoglobin from chronic dilution",
+                  "Markedly elevated hemoglobin from polycythemia",
+                  "Profound leukopenia as the classic finding",
+                  "Severely low platelet count as the expected baseline"
+            ],
+            "answer": "B. Markedly elevated hemoglobin from polycythemia",
+            "rationale": "The lecture directly teaches elevated hemoglobin as a result of chronic hypoxemia and says markedly high values should be reported because of hyperviscosity and clot risk."
+      },
+      {
+            "type": "Priority sequence / Tet spell management",
+            "stem": "A nurse is teaching a parent how a Tet spell is managed in the hospital. Which sequence best matches the lecture's priority order?",
+            "options": [
+                  "Knee-chest position, 100% blow-by oxygen, morphine, IV fluids as needed",
+                  "IV fluids, oral feeding, knee-chest position, oxygen if cyanosis remains",
+                  "Defibrillation, oxygen, morphine, IV fluids",
+                  "Chest compressions, adenosine, oxygen, morphine"
+            ],
+            "answer": "A. Knee-chest position, 100% blow-by oxygen, morphine, IV fluids as needed",
+            "rationale": "The transcript gives the Tet spell order very clearly: knee-chest first, then 100% blow-by oxygen, then morphine, then IV fluids if needed, with calm handling throughout."
+      },
+      {
+            "type": "Priority recognition / Post-cardiac cath",
+            "stem": "A child returns from a femoral cardiac catheterization. Which finding requires immediate action?",
+            "options": [
+                  "The child is sleepy from sedation.",
+                  "The affected extremity is cool, pale, and has weaker perfusion than the other side.",
+                  "A small amount of old drainage is under the dressing.",
+                  "The child asks for a drink."
+            ],
+            "answer": "B. The affected extremity is cool, pale, and has weaker perfusion than the other side.",
+            "rationale": "Post-cath care focuses on distal pulses, color, temperature, and perfusion. A cool pale extremity suggests vascular compromise and is not an expected benign finding."
+      },
+      {
+            "type": "SATA / Family discharge teaching after cath or surgery",
+            "stem": "Which discharge teaching points should the nurse reinforce to the family after pediatric cardiac catheterization or repair? Select all that apply.",
+            "options": [
+                  "Keep the dressing clean and dry.",
+                  "Avoid tub baths or swimming for several days if instructed.",
+                  "Monitor for bleeding, worsening perfusion, poor feeding, or increasing cyanosis.",
+                  "Assume reduced urine output is expected and does not need to be reported.",
+                  "Review all medications, hold parameters, and toxicity signs before discharge.",
+                  "Call for help if a Tet spell is severe or does not improve."
+            ],
+            "answer": "A, B, C, E, F",
+            "rationale": "The lecture emphasizes clean dry dressing care, activity/site precautions, watching for bleeding and poor perfusion, reviewing medication safety, and teaching parents how to respond to Tet spells and when to seek emergency help."
+      },
+      {
+            "type": "Who to see first / Tetralogy prioritization",
+            "stem": "Which child should the nurse assess first?",
+            "options": [
+                  "A child with repaired tetralogy of Fallot whose lips are pink while crying",
+                  "A child with tetralogy of Fallot who has decreased feeding, fewer wet diapers, and pale cool extremities",
+                  "A child with a soft murmur and normal activity level awaiting an outpatient echo",
+                  "A child with clubbing who has stable baseline oxygen saturation and no acute distress"
+            ],
+            "answer": "B. A child with tetralogy of Fallot who has decreased feeding, fewer wet diapers, and pale cool extremities",
+            "rationale": "The lecture repeatedly frames these as major warning signs of worsening heart failure and poor cardiac output: decreased feeding, reduced wet diapers, and pale cool extremities."
+      },
+      {
+            "type": "Best action / HCAHPS and bedside care",
+            "stem": "Which nursing action best reflects the instructor's HCAHPS-focused bedside approach?",
+            "options": [
+                  "Tell the patient to ask the provider about all medications because nursing explanations take too long.",
+                  "Leave quickly after medication administration so the nurse can stay efficient.",
+                  "Explain each medication in plain language, address important side effects, and leave the room organized and safe.",
+                  "Focus only on charting because patient satisfaction is separate from safety."
+            ],
+            "answer": "C. Explain each medication in plain language, address important side effects, and leave the room organized and safe.",
+            "rationale": "The instructor's “Med Pass 101” approach includes verifying identity, discussing what the medication is for and important side effects, and leaving the room safe and organized."
+      },
+      {
+            "type": "Documentation safety",
+            "stem": "After a medication error reaches a patient, which documentation action is correct?",
+            "options": [
+                  "Document the client assessment, notifications, and care provided, but do not chart that an incident report was completed.",
+                  "Chart the full incident report narrative in the EHR so all staff can see it.",
+                  "Do not document anything until risk management finishes investigating.",
+                  "Delete the original medication record to avoid confusion."
+            ],
+            "answer": "A. Document the client assessment, notifications, and care provided, but do not chart that an incident report was completed.",
+            "rationale": "The course is explicit that incident reports are internal quality documents and should not be mentioned in the patient's EHR."
+      },
+      {
+            "type": "Safety event classification / Near miss",
+            "stem": "A nurse notices the pharmacy sent the wrong medication just before administration, and the error is corrected before the drug reaches the patient. How should this event be classified?",
+            "options": [
+                  "Sentinel event",
+                  "Near miss",
+                  "Adverse event with harm",
+                  "Expected variation in care"
+            ],
+            "answer": "B. Near miss",
+            "rationale": "A near miss is an error that could have harmed the patient but did not, often because it was caught in time. The lecture says these should still be reported for system learning."
+      },
+      {
+            "type": "Safety culture / Active versus latent error",
+            "stem": "A hospital's electronic ordering system allows duplicate medication orders without alerting staff, contributing to repeated double dosing. Which type of error is this?",
+            "options": [
+                  "Active error",
+                  "Latent error",
+                  "Sentinel event only",
+                  "Preventive teaching error"
+            ],
+            "answer": "B. Latent error",
+            "rationale": "The defect is embedded in the system itself. The lecture defines latent errors as hidden system problems that contribute to harm indirectly."
+      },
+      {
+            "type": "Who to see first / Safety and falls",
+            "stem": "Which client should the nurse see first?",
+            "options": [
+                  "A 94-year-old receiving furosemide who has poor vision, uses a walker, and says the call bell is out of reach",
+                  "A stable client asking for a fresh blanket",
+                  "A client upset that the room is too bright at noon",
+                  "A client requesting a later breakfast tray"
+            ],
+            "answer": "A. A 94-year-old receiving furosemide who has poor vision, uses a walker, and says the call bell is out of reach",
+            "rationale": "The lecture repeatedly ties safety to preventing harm before it happens. This client has multiple fall risks plus a toileting trigger from diuretics and lacks easy access to help."
+      },
+      {
+            "type": "Procedure safety / Time-out",
+            "stem": "Which action is part of the RN's role in procedure safety according to the course?",
+            "options": [
+                  "Conducting the time-out and verifying that the consent, patient, procedure, and prepared site match",
+                  "Explaining the procedure's risks and benefits instead of the provider",
+                  "Signing the surgical consent for the client",
+                  "Skipping the time-out if the surgeon is in a hurry"
+            ],
+            "answer": "A. Conducting the time-out and verifying that the consent, patient, procedure, and prepared site match",
+            "rationale": "The RN implements procedure safety by verifying the match between consent, patient, procedure, and site and participating in the time-out. The RN does not replace the provider in informed consent discussions."
+      },
+      {
+            "type": "Consent role / Safety",
+            "stem": "A client is about to sign a surgical consent. Which nursing action is appropriate?",
+            "options": [
+                  "Explain the risks and benefits in full detail so the provider does not have to return.",
+                  "Witness the signature, verify identity and voluntariness, and confirm the client appears competent.",
+                  "Tell the client to sign now and ask questions after premedication.",
+                  "Sign the client's name if the client agrees verbally."
+            ],
+            "answer": "B. Witness the signature, verify identity and voluntariness, and confirm the client appears competent.",
+            "rationale": "The RN witnesses the consent process and verifies the basics, but does not substitute for the provider in explaining risks and benefits."
+      },
+      {
+            "type": "Communication failure / Safety event",
+            "stem": "During handoff, the offgoing nurse forgets to mention that a client is allergic to penicillin. The oncoming nurse administers a penicillin-based antibiotic, and the client has a reaction. Which category best fits this event?",
+            "options": [
+                  "Communication error",
+                  "Diagnostic error",
+                  "Preventive error",
+                  "Expected complication"
+            ],
+            "answer": "A. Communication error",
+            "rationale": "The lecture specifically uses omitted allergy information during handoff as a classic example of a communication failure leading to harm."
+      },
+      {
+            "type": "SATA / Safe room and discharge documentation",
+            "stem": "When leaving a patient after care, which safety elements should the nurse document when appropriate? Select all that apply.",
+            "options": [
+                  "Call bell within reach",
+                  "Bed low and locked",
+                  "Non-skid footwear in place when indicated",
+                  "Room organized and patient positioned safely",
+                  "That an incident report was completed",
+                  "Teach-back or verbalized understanding after discharge teaching"
+            ],
+            "answer": "A, B, C, D, F",
+            "rationale": "The safety guide emphasizes documenting concrete safety parameters and documenting discharge teaching/teach-back. Incident reports are not charted in the EHR."
+      },
+      {
+            "type": "Prevention focus / Core bedside safety",
+            "stem": "Which action best reflects the exam rule to choose the answer that prevents harm before it happens?",
+            "options": [
+                  "Waiting for a pressure injury to become visible before turning the client",
+                  "Keeping a Foley catheter in place because it is convenient for staff",
+                  "Helping a high-fall-risk client toilet before the client tries to get up alone",
+                  "Explaining that readmissions are mostly the provider's issue"
+            ],
+            "answer": "C. Helping a high-fall-risk client toilet before the client tries to get up alone",
+            "rationale": "The course repeatedly frames safe, timely, patient-centered nursing as anticipating needs and preventing predictable harm rather than reacting after injury occurs."
+      },
+      {
+            "type": "Exemplars / Safety and quality",
+            "stem": "Which statement correctly matches the course exemplars?",
+            "options": [
+                  "HCAHPS is a patient survey about the hospital experience.",
+                  "CMS is primarily a survey of room cleanliness only.",
+                  "Hospital Safety Grade is the informed consent document for surgery.",
+                  "None of these affect nurses at the bedside."
+            ],
+            "answer": "A. HCAHPS is a patient survey about the hospital experience.",
+            "rationale": "The safety content emphasizes three exemplars: HCAHPS as the patient-experience survey, CMS as the payer/regulator linked to reimbursement, and Hospital Safety Grade as a public safety report card."
+      },
+      {
+            "type": "Just culture / Safety response",
+            "stem": "A nurse catches a near miss before harm occurs and reports it. Which response best reflects a culture of safety?",
+            "options": [
+                  "Punish the nurse immediately because all errors prove incompetence.",
+                  "Focus on what went wrong in the system and how to prevent recurrence while maintaining accountability.",
+                  "Tell staff not to report near misses because no one was harmed.",
+                  "Document the near miss only in the patient's chart and not through reporting channels."
+            ],
+            "answer": "B. Focus on what went wrong in the system and how to prevent recurrence while maintaining accountability.",
+            "rationale": "The lecture defines a culture of safety as one that promotes transparency, learning, and system improvement rather than pure blame, while still valuing accountability."
+      }
+];
+
+    function renderQuestions() {
+      const container = document.getElementById('questions');
+      container.innerHTML = '';
+      questions.forEach((q, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'question';
+
+        const qnum = document.createElement('div');
+        qnum.className = 'qnum';
+        qnum.textContent = `Question ${idx + 1}`;
+        wrapper.appendChild(qnum);
+
+        const type = document.createElement('div');
+        type.className = 'type';
+        type.textContent = q.type;
+        wrapper.appendChild(type);
+
+        const stem = document.createElement('div');
+        stem.className = 'stem';
+        stem.textContent = q.stem;
+        wrapper.appendChild(stem);
+
+        const options = document.createElement('ol');
+        options.className = 'options';
+        options.type = 'A';
+        q.options.forEach(opt => {
+          const li = document.createElement('li');
+          li.textContent = opt;
+          options.appendChild(li);
+        });
+        wrapper.appendChild(options);
+
+        const btn = document.createElement('button');
+        btn.textContent = 'Show Answer and Rationale';
+        btn.onclick = () => {
+          const answer = wrapper.querySelector('.answer');
+          answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        };
+        wrapper.appendChild(btn);
+
+        const answer = document.createElement('div');
+        answer.className = 'answer';
+        answer.innerHTML = `<strong>Answer:</strong> ${
+          q.answer
+        }<br><br><strong>Rationale:</strong> ${
+          q.rationale
+        }`;
+        wrapper.appendChild(answer);
+
+        container.appendChild(wrapper);
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function toggleAllAnswers() {
+      const answers = document.querySelectorAll('.answer');
+      const anyHidden = Array.from(answers).some(a => a.style.display !== 'block');
+      answers.forEach(a => a.style.display = anyHidden ? 'block' : 'none');
+    }
+
+    renderQuestions();
+  </script>
+</body>
+</html>
